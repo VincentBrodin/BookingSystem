@@ -20,11 +20,9 @@
       devShells.x86_64-linux.default = pkgs.mkShell {
         buildInputs = [
           pkgs.dotnet-sdk_9
-          pkgs.dotnet-ef
           pkgs.csharp-ls
           pkgs.vscode-fhs
           pkgs.sqlcmd
-          pkgs.nodejs_24
         ];
 
         shellHook = ''
