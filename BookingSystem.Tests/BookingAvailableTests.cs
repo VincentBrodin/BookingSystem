@@ -2,7 +2,7 @@ using BookingSystem.Core.Models;
 
 namespace BookingSystem.Tests;
 
-public class BookingUnitTest
+public class IsAvailableUnit
 {
     [Fact]
     public void BothDateMiss()

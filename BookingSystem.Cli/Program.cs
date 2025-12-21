@@ -1,5 +1,4 @@
 ﻿using BookingSystem.Core.Data;
-using BookingSystem.Core.Models;
 using BookingSystem.Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -43,6 +42,7 @@ static class Program
                     await CreateBooking(bookingService);
                     break;
                 case 4:
+                    await ShowBookings(bookingService);
                     break;
                 case 5:
                     running = false;
@@ -76,10 +76,6 @@ static class Program
             foreach (var room in rooms)
             {
                 Console.WriteLine($"| {room}");
-                foreach (var booking in room.Bookings)
-                {
-                    Console.WriteLine($"| | {booking}");
-                }
             }
         }
         WaitForInput();
@@ -123,6 +119,28 @@ static class Program
             else
             {
                 Console.WriteLine("Room is booked that time");
+            }
+        }
+        WaitForInput();
+    }
+
+    static async Task ShowBookings(BookingService service)
+    {
+        var rooms = await service.GetRooms();
+        if (rooms.Count == 0)
+        {
+            Console.WriteLine("No rooms to show :(");
+        }
+        else
+        {
+            Console.WriteLine($"Found {rooms.Count} rooms:");
+            foreach (var room in rooms)
+            {
+                Console.WriteLine($"| {room}");
+                foreach (var booking in room.Bookings)
+                {
+                    Console.WriteLine($"| | {booking}");
+                }
             }
         }
         WaitForInput();
