@@ -17,14 +17,7 @@ public class Room
 
     public bool IsAvailable(DateTime fromDate, DateTime toDate)
     {
-        foreach (var booking in Bookings)
-        {
-            if ((fromDate > booking.FromDate || toDate > booking.FromDate) && (fromDate < booking.ToDate || toDate < booking.ToDate))
-            {
-                return false;
-            }
-        }
-        return true;
+        return !Bookings.Any(b => fromDate < b.ToDate && toDate > b.FromDate);
     }
 
     public override String ToString()

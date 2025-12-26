@@ -20,6 +20,13 @@ public class BookingService(BookingDbContext context)
         return room;
     }
 
+
+    public async Task<Room?> GetRoomByName(string name)
+    {
+        var room = await context.Rooms.Include(r => r.Bookings).FirstOrDefaultAsync(r => r.Name == name);
+        return room;
+    }
+
     public async Task<List<Room>> GetRooms()
     {
         var rooms = await context.Rooms.Include(r => r.Bookings).ToListAsync();
